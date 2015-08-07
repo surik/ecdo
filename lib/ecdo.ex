@@ -17,10 +17,11 @@ defmodule Ecdo do
             |> Ecdo.Builder.Select.apply(query)
             |> Ecdo.Builder.OrderBy.apply(query)
             |> Ecdo.Builder.QueryExpr.apply(query)
+            |> Ecdo.Builder.Load.apply(query)
   end
 
   @keys [:where, :select, :select_as, :limit, :offset, :distincts,
-         :order_by, :preload, :left_join, :right_join, :full_join, :join]
+         :order_by, :load, :preload, :left_join, :right_join, :full_join, :join]
   for key <- @keys do
     defp check_string(unquote(key), %{unquote(to_string(key)) => value}, acc), do: Map.put(acc, unquote(key), value)
   end
